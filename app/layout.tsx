@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "تفريغ | مساحة دعم نفسي ذكية",
-  description: "مساحتك الآمنة للتفريغ النفسي وترتيب الأفكار عبر الذكاء الاصطناعي",
+  title: "مفاجاة المبرمج",
+  description: "نو ديسكربشن",
 };
 
 export default function RootLayout({
