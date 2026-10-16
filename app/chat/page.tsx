@@ -1,4 +1,3 @@
-'tsx'
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -30,7 +29,7 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: 'أهلاً بك في مساحتك الآمنة. خذ نفساً عميقاً، أنا هنا لأستمع إليك بكل اهتمام. ما الذي يدور في ذهنك اليوم؟'
+      content: 'أهلاً بك في مساحتك الآمنة.\n\nخذ نفساً عميقاً، أنا هنا لأستمع إليك بكل اهتمام.\n\nما الذي يدور في ذهنك اليوم؟'
     }
   ]);
   const [input, setInput] = useState('');
@@ -116,7 +115,7 @@ export default function ChatPage() {
           </button>
 
           <div className={`w-8 h-8 rounded-full border flex items-center justify-center ${isDark ? 'bg-slate-800 border-slate-700 text-indigo-400' : 'bg-slate-200 border-slate-300 text-indigo-600'}`}>
-             🧠
+              🧠
           </div>
           <span className="font-bold text-sm">المعالج الذكي</span>
         </div>
@@ -149,14 +148,22 @@ export default function ChatPage() {
                     : 'bg-white text-slate-800 border border-slate-100 rounded-bl-none'
               }`}
             >
-              {msg.content}
+              {msg.role === 'assistant' ? (
+                <div className="space-y-3">
+                  {msg.content.split('\n').map((paragraph, idx) => (
+                    paragraph.trim() ? <p key={idx}>{paragraph}</p> : null
+                  ))}
+                </div>
+              ) : (
+                msg.content
+              )}
             </div>
 
              {msg.role === 'user' && (
                  <div className={`w-9 h-9 rounded-2xl border flex items-center justify-center flex-shrink-0 mt-1 ${isDark ? 'bg-slate-800 border-slate-700 text-slate-300' : 'bg-slate-200 border-slate-300 text-slate-600'}`}>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                  </div>
-            )}
+             )}
           </div>
         ))}
         {loading && (
